@@ -216,6 +216,7 @@ def compare_algorithms():
     print("="*60)
     
     plot_comparison(results)
+    plot_time_comparison(results)
     
     # Generate decision boundary visualizations
     print("\n  Generating 2D Decision Boundaries (this may take a few seconds)...")
@@ -271,6 +272,56 @@ def plot_comparison(results, out_path="outputs/figures/algorithm_comparison.svg"
     with open(out_path, "w") as f:
         f.write("\n".join(svg))
     print(f"\n  [Plot] Saved comparison chart to: {out_path}")
+
+def plot_time_comparison(results, out_path="outputs/figures/algorithm_time_comparison.svg"):
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    W, H = 700, 400
+    margin = {"top": 60, "right": 40, "bottom": 60, "left": 110}
+    plot_w = W - margin["left"] - margin["right"]
+    plot_h = H - margin["top"] - margin["bottom"]
+    
+    svg = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
+        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
+        f'  <text x="{W/2}" y="35" fill="#ffffff" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Wall-Clock Time Comparison</text>'
+    ]
+    
+    names = list(results.keys())
+    times = [r["time_ms"] for r in results.values()]
+    
+    max_time_plot = max(times) * 1.2
+    if max_time_plot == 0: max_time_plot = 1.0
+    
+    svg.append(f'  <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1">')
+    for i in range(6):
+        tick_time = i * (max_time_plot / 5)
+        y = margin["top"] + plot_h - (tick_time / max_time_plot) * plot_h
+        svg.append(f'    <line x1="{margin["left"]}" y1="{y}" x2="{W - margin["right"]}" y2="{y}"/>')
+        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_time:.1f}ms</text>')
+    svg.append(f'  </g>')
+
+    svg.append(f'  <text x="20" y="{H/2}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 20 {H/2})">Time (ms)</text>')
+    
+    bar_width = min(80, plot_w / (len(names) + 1))
+    spacing = (plot_w - (bar_width * len(names))) / (len(names) + 1)
+    colors = ["#f4a261", "#e76f51", "#8ab17d", "#2a9d8f"]
+    
+    for i, name in enumerate(names):
+        time_ms = results[name]["time_ms"]
+        x = margin["left"] + spacing + i * (bar_width + spacing)
+        bar_h = (time_ms / max_time_plot) * plot_h
+        if bar_h < 0: bar_h = 5
+        y = margin["top"] + plot_h - bar_h
+        
+        svg.append(f'  <rect x="{x}" y="{y}" width="{bar_width}" height="{bar_h}" fill="{colors[i % len(colors)]}" rx="4" ry="4"/>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{time_ms:.2f}ms</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">{name}</text>')
+
+    svg.append('</svg>')
+    
+    with open(out_path, "w") as f:
+        f.write("\n".join(svg))
+    print(f"  [Plot] Saved time comparison chart to: {out_path}")
 
 def plot_decision_boundaries(X, y, out_path="outputs/figures/decision_boundaries.svg"):
     """

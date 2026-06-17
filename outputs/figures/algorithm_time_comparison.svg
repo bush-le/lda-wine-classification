@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400">
+  <rect width="700" height="400" fill="#1a1a2e"/>
+  <text x="350.0" y="35" fill="#ffffff" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Wall-Clock Time Comparison</text>
+  <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1">
+    <line x1="110" y1="340.0" x2="660" y2="340.0"/>
+    <text x="100" y="345.0" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">0.0ms</text>
+    <line x1="110" y1="284.0" x2="660" y2="284.0"/>
+    <text x="100" y="289.0" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">265.9ms</text>
+    <line x1="110" y1="228.0" x2="660" y2="228.0"/>
+    <text x="100" y="233.0" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">531.8ms</text>
+    <line x1="110" y1="172.0" x2="660" y2="172.0"/>
+    <text x="100" y="177.0" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">797.7ms</text>
+    <line x1="110" y1="116.0" x2="660" y2="116.0"/>
+    <text x="100" y="121.0" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">1063.6ms</text>
+    <line x1="110" y1="60.0" x2="660" y2="60.0"/>
+    <text x="100" y="65.0" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">1329.5ms</text>
+  </g>
+  <text x="20" y="200.0" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 20 200.0)">Time (ms)</text>
+  <rect x="156.0" y="337.741666310514" width="80" height="2.2583336894860184" fill="#f4a261" rx="4" ry="4"/>
+  <text x="196.0" y="327.741666310514" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">10.72ms</text>
+  <text x="196.0" y="360" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">KNN (k=5)</text>
+  <rect x="282.0" y="339.80261322387963" width="80" height="0.19738677612038497" fill="#e76f51" rx="4" ry="4"/>
+  <text x="322.0" y="329.80261322387963" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">0.94ms</text>
+  <text x="322.0" y="360" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">Gaussian NB</text>
+  <rect x="408.0" y="106.66666666666666" width="80" height="233.33333333333334" fill="#8ab17d" rx="4" ry="4"/>
+  <text x="448.0" y="96.66666666666666" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">1107.90ms</text>
+  <text x="448.0" y="360" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">Logistic Reg</text>
+  <rect x="534.0" y="334.4370973457178" width="80" height="5.562902654282223" fill="#2a9d8f" rx="4" ry="4"/>
+  <text x="574.0" y="324.4370973457178" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">26.41ms</text>
+  <text x="574.0" y="360" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">LDA (shrink=None)</text>
+</svg>
