@@ -232,8 +232,8 @@ def plot_comparison(results, out_path="outputs/figures/algorithm_comparison.svg"
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="35" fill="#ffffff" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Algorithm Comparison (Wine Dataset)</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="35" fill="#000000" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Algorithm Comparison (Wine Dataset)</text>'
     ]
     
     names = list(results.keys())
@@ -242,19 +242,19 @@ def plot_comparison(results, out_path="outputs/figures/algorithm_comparison.svg"
     min_acc_plot = 0.90
     acc_range_plot = 1.0 - min_acc_plot
     
-    svg.append(f'  <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1">')
+    svg.append(f'  <g stroke="#000000" stroke-opacity="0.2" stroke-width="1">')
     for i in range(6):
         tick_acc = min_acc_plot + i * 0.02
         y = margin["top"] + plot_h - (i * 0.02 / acc_range_plot) * plot_h
         svg.append(f'    <line x1="{margin["left"]}" y1="{y}" x2="{W - margin["right"]}" y2="{y}"/>')
-        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_acc*100:.0f}%</text>')
+        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_acc*100:.0f}%</text>')
     svg.append(f'  </g>')
 
-    svg.append(f'  <text x="25" y="{H/2}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 25 {H/2})">Cross-Validation Accuracy</text>')
+    svg.append(f'  <text x="25" y="{H/2}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 25 {H/2})">Cross-Validation Accuracy</text>')
     
     bar_width = min(80, plot_w / (len(names) + 1))
     spacing = (plot_w - (bar_width * len(names))) / (len(names) + 1)
-    colors = ["#f4a261", "#e76f51", "#8ab17d", "#2a9d8f"]
+    colors = ["#e76f51", "#2a9d8f", "#e9c46a", "#264653"]
     
     for i, name in enumerate(names):
         acc = results[name]["acc"]
@@ -264,8 +264,8 @@ def plot_comparison(results, out_path="outputs/figures/algorithm_comparison.svg"
         y = margin["top"] + plot_h - bar_h
         
         svg.append(f'  <rect x="{x}" y="{y}" width="{bar_width}" height="{bar_h}" fill="{colors[i]}" rx="4" ry="4"/>')
-        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{acc*100:.2f}%</text>')
-        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">{name}</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{acc*100:.2f}%</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="middle">{name}</text>')
 
     svg.append('</svg>')
     
@@ -282,8 +282,8 @@ def plot_time_comparison(results, out_path="outputs/figures/algorithm_time_compa
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="35" fill="#ffffff" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Wall-Clock Time Comparison</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="35" fill="#000000" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Wall-Clock Time Comparison</text>'
     ]
     
     names = list(results.keys())
@@ -292,19 +292,19 @@ def plot_time_comparison(results, out_path="outputs/figures/algorithm_time_compa
     max_time_plot = max(times) * 1.2
     if max_time_plot == 0: max_time_plot = 1.0
     
-    svg.append(f'  <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1">')
+    svg.append(f'  <g stroke="#000000" stroke-opacity="0.2" stroke-width="1">')
     for i in range(6):
         tick_time = i * (max_time_plot / 5)
         y = margin["top"] + plot_h - (tick_time / max_time_plot) * plot_h
         svg.append(f'    <line x1="{margin["left"]}" y1="{y}" x2="{W - margin["right"]}" y2="{y}"/>')
-        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_time:.1f}ms</text>')
+        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_time:.1f}ms</text>')
     svg.append(f'  </g>')
 
-    svg.append(f'  <text x="20" y="{H/2}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 20 {H/2})">Time (ms)</text>')
+    svg.append(f'  <text x="20" y="{H/2}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 20 {H/2})">Time (ms)</text>')
     
     bar_width = min(80, plot_w / (len(names) + 1))
     spacing = (plot_w - (bar_width * len(names))) / (len(names) + 1)
-    colors = ["#f4a261", "#e76f51", "#8ab17d", "#2a9d8f"]
+    colors = ["#e76f51", "#2a9d8f", "#e9c46a", "#264653"]
     
     for i, name in enumerate(names):
         time_ms = results[name]["time_ms"]
@@ -314,8 +314,8 @@ def plot_time_comparison(results, out_path="outputs/figures/algorithm_time_compa
         y = margin["top"] + plot_h - bar_h
         
         svg.append(f'  <rect x="{x}" y="{y}" width="{bar_width}" height="{bar_h}" fill="{colors[i % len(colors)]}" rx="4" ry="4"/>')
-        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{time_ms:.2f}ms</text>')
-        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">{name}</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{time_ms:.2f}ms</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="middle">{name}</text>')
 
     svg.append('</svg>')
     
@@ -377,8 +377,8 @@ def plot_decision_boundaries(X, y, out_path="outputs/figures/decision_boundaries
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="45" fill="#ffffff" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle">2D Decision Boundaries Comparison</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="45" fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle">2D Decision Boundaries Comparison</text>'
     ]
     
     # Colors for regions and points
@@ -397,8 +397,8 @@ def plot_decision_boundaries(X, y, out_path="outputs/figures/decision_boundaries
     
     for px_start, py_start, name in positions:
         svg.append(f'  <g transform="translate({px_start}, {py_start})">')
-        svg.append(f'    <text x="{plot_w/2}" y="-15" fill="#ffffff" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">{name}</text>')
-        svg.append(f'    <rect x="0" y="0" width="{plot_w}" height="{plot_h}" fill="#2a2a40" stroke="#ffffff" stroke-opacity="0.3"/>')
+        svg.append(f'    <text x="{plot_w/2}" y="-15" fill="#000000" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">{name}</text>')
+        svg.append(f'    <rect x="0" y="0" width="{plot_w}" height="{plot_h}" fill="#f0f0f0" stroke="#000000" stroke-opacity="0.3"/>')
         
         # Draw background regions
         preds = grid_preds[name]
@@ -424,7 +424,7 @@ def plot_decision_boundaries(X, y, out_path="outputs/figures/decision_boundaries
             cy = plot_h - ((y_val - y_min) / (y_max - y_min)) * plot_h
             
             pt_color = colors[label][1]
-            svg.append(f'    <circle cx="{cx}" cy="{cy}" r="3" fill="{pt_color}" stroke="#ffffff" stroke-width="0.5"/>')
+            svg.append(f'    <circle cx="{cx}" cy="{cy}" r="3" fill="{pt_color}" stroke="#000000" stroke-width="0.5"/>')
             
         svg.append('  </g>')
         

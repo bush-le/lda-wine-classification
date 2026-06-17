@@ -62,19 +62,19 @@ def plot_correlation_heatmap(X, feature_names, out_path="outputs/figures/correla
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="40" fill="#ffffff" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Feature Correlation Heatmap</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="40" fill="#000000" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Feature Correlation Heatmap</text>'
     ]
     
     # Draw heatmap
     for i in range(n_features):
         # Y-axis label
-        svg.append(f'  <text x="{margin_left - 10}" y="{margin_top + i*cell_size + cell_size/2 + 5}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end">{feature_names[i]}</text>')
+        svg.append(f'  <text x="{margin_left - 10}" y="{margin_top + i*cell_size + cell_size/2 + 5}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="end">{feature_names[i]}</text>')
         
         # X-axis label (rotated)
         x_label = margin_left + i*cell_size + cell_size/2
         y_label = margin_top - 10
-        svg.append(f'  <text x="{x_label}" y="{y_label}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="start" transform="rotate(-45 {x_label} {y_label})">{feature_names[i]}</text>')
+        svg.append(f'  <text x="{x_label}" y="{y_label}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="start" transform="rotate(-45 {x_label} {y_label})">{feature_names[i]}</text>')
         
         for j in range(n_features):
             corr = corr_matrix[i][j]
@@ -90,10 +90,10 @@ def plot_correlation_heatmap(X, feature_names, out_path="outputs/figures/correla
                 intensity = int(abs(corr) * 255)
                 color = f"rgb({max(50, int(50*(1-abs(corr))))}, {max(50, int(50*(1-abs(corr))))}, {intensity})"
                 
-            svg.append(f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" fill="{color}" stroke="#1a1a2e" stroke-width="1"/>')
+            svg.append(f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" fill="{color}" stroke="#ffffff" stroke-width="1"/>')
             
             # Text inside cell
-            text_color = "#ffffff" if abs(corr) > 0.4 else "#888888"
+            text_color = "#000000" if abs(corr) > 0.4 else "#888888"
             svg.append(f'  <text x="{x + cell_size/2}" y="{y + cell_size/2 + 4}" fill="{text_color}" font-family="sans-serif" font-size="11" text-anchor="middle">{corr:.2f}</text>')
 
     svg.append('</svg>')
@@ -112,7 +112,7 @@ def plot_feature_distributions(X, y, feature_names, out_path="outputs/figures/fe
     
     n_plots = min(4, len(feature_names))
     classes = sorted(list(set(y)))
-    colors = ["#ff6b7a", "#52d9cb", "#f4d792"] # Class 1, 2, 3 colors
+    colors = ["#e63946", "#2a9d8f", "#e9c46a"] # Class 1, 2, 3 colors
     
     plot_w, plot_h = 300, 200
     margin = {"top": 80, "right": 20, "bottom": 40, "left": 40}
@@ -124,14 +124,14 @@ def plot_feature_distributions(X, y, feature_names, out_path="outputs/figures/fe
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="40" fill="#ffffff" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Feature Distributions by Class</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="40" fill="#000000" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Feature Distributions by Class</text>'
     ]
     
     # Legend
     for i, c in enumerate(classes):
         svg.append(f'  <rect x="{W/2 - 100 + i*80}" y="60" width="15" height="15" fill="{colors[i]}" rx="2"/>')
-        svg.append(f'  <text x="{W/2 - 80 + i*80}" y="73" fill="#ffffff" font-family="sans-serif" font-size="14">Class {c}</text>')
+        svg.append(f'  <text x="{W/2 - 80 + i*80}" y="73" fill="#000000" font-family="sans-serif" font-size="14">Class {c}</text>')
     
     for i in range(n_plots):
         row = i // cols
@@ -145,15 +145,15 @@ def plot_feature_distributions(X, y, feature_names, out_path="outputs/figures/fe
         max_v = max(feature_vals)
         v_range = max_v - min_v if max_v > min_v else 1.0
         
-        svg.append(f'  <text x="{ox + plot_w/2}" y="{oy - 10}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle">{feature_names[i]}</text>')
+        svg.append(f'  <text x="{ox + plot_w/2}" y="{oy - 10}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle">{feature_names[i]}</text>')
         
         # Axes
-        svg.append(f'  <line x1="{ox}" y1="{oy+plot_h}" x2="{ox+plot_w}" y2="{oy+plot_h}" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>')
-        svg.append(f'  <line x1="{ox}" y1="{oy}" x2="{ox}" y2="{oy+plot_h}" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>')
+        svg.append(f'  <line x1="{ox}" y1="{oy+plot_h}" x2="{ox+plot_w}" y2="{oy+plot_h}" stroke="#000000" stroke-opacity="0.5" stroke-width="2"/>')
+        svg.append(f'  <line x1="{ox}" y1="{oy}" x2="{ox}" y2="{oy+plot_h}" stroke="#000000" stroke-opacity="0.5" stroke-width="2"/>')
         
         # Ticks
-        svg.append(f'  <text x="{ox}" y="{oy+plot_h+20}" fill="#a0a0b0" font-family="sans-serif" font-size="12" text-anchor="middle">{min_v:.1f}</text>')
-        svg.append(f'  <text x="{ox+plot_w}" y="{oy+plot_h+20}" fill="#a0a0b0" font-family="sans-serif" font-size="12" text-anchor="middle">{max_v:.1f}</text>')
+        svg.append(f'  <text x="{ox}" y="{oy+plot_h+20}" fill="#555555" font-family="sans-serif" font-size="12" text-anchor="middle">{min_v:.1f}</text>')
+        svg.append(f'  <text x="{ox+plot_w}" y="{oy+plot_h+20}" fill="#555555" font-family="sans-serif" font-size="12" text-anchor="middle">{max_v:.1f}</text>')
         
         # Simple Histogram (15 bins)
         n_bins = 15

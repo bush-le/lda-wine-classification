@@ -1,29 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="330" height="350" style="background:#1a1a2e;font-family:monospace;">
-<text x="165" y="28" text-anchor="middle" fill="#e0e0e0" font-size="14" font-weight="bold">Confusion Matrix</text>
-<text x="165" y="340" text-anchor="middle" fill="#aaa" font-size="11">Predicted Label</text>
-<text x="12" y="175" text-anchor="middle" fill="#aaa" font-size="11" transform="rotate(-90,12,175)">True Label</text>
-<text x="115" y="70" text-anchor="middle" fill="#ccc" font-size="12">Class 1</text>
-<text x="185" y="70" text-anchor="middle" fill="#ccc" font-size="12">Class 2</text>
-<text x="255" y="70" text-anchor="middle" fill="#ccc" font-size="12">Class 3</text>
-<text x="70" y="120" text-anchor="end" fill="#ccc" font-size="12">Class 1</text>
-<text x="70" y="190" text-anchor="end" fill="#ccc" font-size="12">Class 2</text>
-<text x="70" y="260" text-anchor="end" fill="#ccc" font-size="12">Class 3</text>
-<rect x="80" y="80" width="70" height="70" fill="rgb(42,157,143)" stroke="#1a1a2e" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="330" height="350" style="background:#ffffff;font-family:monospace;">
+<text x="165" y="28" text-anchor="middle" fill="#000000" font-size="14" font-weight="bold">Confusion Matrix</text>
+<text x="165" y="340" text-anchor="middle" fill="#444444" font-size="11">Predicted Label</text>
+<text x="12" y="175" text-anchor="middle" fill="#444444" font-size="11" transform="rotate(-90,12,175)">True Label</text>
+<text x="115" y="70" text-anchor="middle" fill="#333333" font-size="12">Class 1</text>
+<text x="185" y="70" text-anchor="middle" fill="#333333" font-size="12">Class 2</text>
+<text x="255" y="70" text-anchor="middle" fill="#333333" font-size="12">Class 3</text>
+<text x="70" y="120" text-anchor="end" fill="#333333" font-size="12">Class 1</text>
+<text x="70" y="190" text-anchor="end" fill="#333333" font-size="12">Class 2</text>
+<text x="70" y="260" text-anchor="end" fill="#333333" font-size="12">Class 3</text>
+<rect x="80" y="80" width="70" height="70" fill="rgb(42,157,143)" stroke="#ffffff" stroke-width="2"/>
 <text x="115" y="121" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">17</text>
-<rect x="150" y="80" width="70" height="70" fill="rgb(26,26,46)" stroke="#1a1a2e" stroke-width="2"/>
-<text x="185" y="121" text-anchor="middle" fill="#ccc" font-size="18" font-weight="bold">0</text>
-<rect x="220" y="80" width="70" height="70" fill="rgb(26,26,46)" stroke="#1a1a2e" stroke-width="2"/>
-<text x="255" y="121" text-anchor="middle" fill="#ccc" font-size="18" font-weight="bold">0</text>
-<rect x="80" y="150" width="70" height="70" fill="rgb(26,26,46)" stroke="#1a1a2e" stroke-width="2"/>
-<text x="115" y="191" text-anchor="middle" fill="#ccc" font-size="18" font-weight="bold">0</text>
-<rect x="150" y="150" width="70" height="70" fill="rgb(42,157,143)" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="150" y="80" width="70" height="70" fill="rgb(250,250,250)" stroke="#ffffff" stroke-width="2"/>
+<text x="185" y="121" text-anchor="middle" fill="#333333" font-size="18" font-weight="bold">0</text>
+<rect x="220" y="80" width="70" height="70" fill="rgb(250,250,250)" stroke="#ffffff" stroke-width="2"/>
+<text x="255" y="121" text-anchor="middle" fill="#333333" font-size="18" font-weight="bold">0</text>
+<rect x="80" y="150" width="70" height="70" fill="rgb(250,250,250)" stroke="#ffffff" stroke-width="2"/>
+<text x="115" y="191" text-anchor="middle" fill="#333333" font-size="18" font-weight="bold">0</text>
+<rect x="150" y="150" width="70" height="70" fill="rgb(42,157,143)" stroke="#ffffff" stroke-width="2"/>
 <text x="185" y="191" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">17</text>
-<rect x="220" y="150" width="70" height="70" fill="rgb(26,26,46)" stroke="#1a1a2e" stroke-width="2"/>
-<text x="255" y="191" text-anchor="middle" fill="#ccc" font-size="18" font-weight="bold">0</text>
-<rect x="80" y="220" width="70" height="70" fill="rgb(26,26,46)" stroke="#1a1a2e" stroke-width="2"/>
-<text x="115" y="261" text-anchor="middle" fill="#ccc" font-size="18" font-weight="bold">0</text>
-<rect x="150" y="220" width="70" height="70" fill="rgb(26,26,46)" stroke="#1a1a2e" stroke-width="2"/>
-<text x="185" y="261" text-anchor="middle" fill="#ccc" font-size="18" font-weight="bold">0</text>
-<rect x="220" y="220" width="70" height="70" fill="rgb(56,119,114)" stroke="#1a1a2e" stroke-width="2"/>
+<rect x="220" y="150" width="70" height="70" fill="rgb(250,250,250)" stroke="#ffffff" stroke-width="2"/>
+<text x="255" y="191" text-anchor="middle" fill="#333333" font-size="18" font-weight="bold">0</text>
+<rect x="80" y="220" width="70" height="70" fill="rgb(250,250,250)" stroke="#ffffff" stroke-width="2"/>
+<text x="115" y="261" text-anchor="middle" fill="#333333" font-size="18" font-weight="bold">0</text>
+<rect x="150" y="220" width="70" height="70" fill="rgb(250,250,250)" stroke="#ffffff" stroke-width="2"/>
+<text x="185" y="261" text-anchor="middle" fill="#333333" font-size="18" font-weight="bold">0</text>
+<rect x="220" y="220" width="70" height="70" fill="rgb(115,189,180)" stroke="#ffffff" stroke-width="2"/>
 <text x="255" y="261" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">11</text>
 </svg>

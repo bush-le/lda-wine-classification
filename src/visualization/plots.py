@@ -22,7 +22,7 @@ Visualizations Included
 2. bar_variance: Bar chart showing explained variance ratio + cumulative line
 3. heatmap_confusion: Color-coded confusion matrix heatmap
 
-All plots follow a dark theme (dark background, light text) for professional appearance.
+All plots follow a dark theme (dark background, dark text) for professional appearance.
 """
 
 import os
@@ -34,9 +34,9 @@ import math
 # Main color = primary fill, Accent = stroke/highlight for emphasis
 
 PALETTE = {
-    1: ("#e63946", "#ff6b7a"),   # Red   — Wine class 1
-    2: ("#2a9d8f", "#52d9cb"),   # Teal  — Wine class 2
-    3: ("#e9c46a", "#f4d792"),   # Gold  — Wine class 3
+    1: ("#e63946", "#a82b35"),   # Red   — Wine class 1
+    2: ("#2a9d8f", "#1b635a"),   # Teal  — Wine class 2
+    3: ("#e9c46a", "#b5974e"),   # Gold  — Wine class 3
 }
 
 
@@ -90,7 +90,7 @@ def scatter_lda(X_lda, y, title="LDA Projection",
     
     SVG Structure
     ------
-    - Dark background (#1a1a2e) with light text for professional appearance
+    - Light background (#ffffff) with dark text for professional appearance
     - X and Y axes with tick marks at regular intervals
     - Faint grid lines for reference
     - Semi-transparent points to show overlaps
@@ -157,11 +157,11 @@ def scatter_lda(X_lda, y, title="LDA Projection",
     # ── Build SVG ────────────────────────────────────────────────────
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
-        f'style="background:#1a1a2e;font-family:monospace;">',
+        f'style="background:#ffffff;font-family:monospace;">',
 
         # Title
         f'<text x="{W//2}" y="28" text-anchor="middle" '
-        f'fill="#e0e0e0" font-size="16" font-weight="bold">{title}</text>',
+        f'fill="#000000" font-size="16" font-weight="bold">{title}</text>',
 
         # Axes (X and Y)
         f'<line x1="{pad}" y1="{H-pad}" x2="{W-pad}" y2="{H-pad}" '
@@ -171,9 +171,9 @@ def scatter_lda(X_lda, y, title="LDA Projection",
 
         # Axis labels
         f'<text x="{W//2}" y="{H-8}" text-anchor="middle" '
-        f'fill="#aaa" font-size="12">LD1</text>',
+        f'fill="#444444" font-size="12">LD1</text>',
         f'<text x="14" y="{H//2}" text-anchor="middle" '
-        f'fill="#aaa" font-size="12" '
+        f'fill="#444444" font-size="12" '
         f'transform="rotate(-90,14,{H//2})">LD2</text>',
     ]
 
@@ -190,7 +190,7 @@ def scatter_lda(X_lda, y, title="LDA Projection",
     # ── Plot points ──────────────────────────────────────────────────
     for xi, yi in zip(X_lda, y):
         px, py = to_px(xi[0], xi[1])
-        fill, stroke = PALETTE.get(yi, ("#888", "#aaa"))
+        fill, stroke = PALETTE.get(yi, ("#888", "#444444"))
         svg.append(
             f'<circle cx="{px:.1f}" cy="{py:.1f}" r="5" '
             f'fill="{fill}" stroke="{stroke}" stroke-width="0.8" opacity="0.85"/>'
@@ -200,12 +200,12 @@ def scatter_lda(X_lda, y, title="LDA Projection",
     lx, ly = W - pad - 90, pad + 20
     svg.append(f'<rect x="{lx-8}" y="{ly-16}" width="100" '
                f'height="{len(classes)*24+12}" rx="6" '
-               f'fill="#16213e" stroke="#444" stroke-width="1"/>')
+               f'fill="#f9f9f9" stroke="#444" stroke-width="1"/>')
     for i, c in enumerate(classes):
-        fill, _ = PALETTE.get(c, ("#888", "#aaa"))
+        fill, _ = PALETTE.get(c, ("#888", "#444444"))
         cy = ly + i * 24
         svg.append(f'<circle cx="{lx+6}" cy="{cy}" r="5" fill="{fill}"/>')
-        svg.append(f'<text x="{lx+16}" y="{cy+4}" fill="#ccc" '
+        svg.append(f'<text x="{lx+16}" y="{cy+4}" fill="#333333" '
                    f'font-size="11">Class {c}</text>')
 
     svg.append("</svg>")
@@ -286,8 +286,8 @@ def bar_variance(eigenvalues, explained_ratios,
 
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
-        f'style="background:#1a1a2e;font-family:monospace;">',
-        f'<text x="{W//2}" y="30" text-anchor="middle" fill="#e0e0e0" '
+        f'style="background:#ffffff;font-family:monospace;">',
+        f'<text x="{W//2}" y="30" text-anchor="middle" fill="#000000" '
         f'font-size="14" font-weight="bold">Explained Variance Ratio</text>',
     ]
 
@@ -319,10 +319,10 @@ def bar_variance(eigenvalues, explained_ratios,
                    f'fill="#e63946" rx="3" opacity="0.85"/>')
         # Percentage label on top of bar
         svg.append(f'<text x="{bx:.1f}" y="{by-6:.1f}" text-anchor="middle" '
-                   f'fill="#e0e0e0" font-size="10">{ratio:.1%}</text>')
+                   f'fill="#000000" font-size="10">{ratio:.1%}</text>')
         # Component label below
         svg.append(f'<text x="{bx:.1f}" y="{H-pad_b+16:.1f}" '
-                   f'text-anchor="middle" fill="#aaa" font-size="11">LD{i+1}</text>')
+                   f'text-anchor="middle" fill="#444444" font-size="11">LD{i+1}</text>')
 
     # ── Draw cumulative line ─────────────────────────────────────────
     # Shows running total: LD1 alone, LD1+LD2, etc.
@@ -430,12 +430,12 @@ def heatmap_confusion(CM_dict, classes,
 
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
-        f'style="background:#1a1a2e;font-family:monospace;">',
-        f'<text x="{W//2}" y="28" text-anchor="middle" fill="#e0e0e0" '
+        f'style="background:#ffffff;font-family:monospace;">',
+        f'<text x="{W//2}" y="28" text-anchor="middle" fill="#000000" '
         f'font-size="14" font-weight="bold">Confusion Matrix</text>',
         f'<text x="{W//2}" y="{H-10}" text-anchor="middle" '
-        f'fill="#aaa" font-size="11">Predicted Label</text>',
-        f'<text x="12" y="{H//2}" text-anchor="middle" fill="#aaa" '
+        f'fill="#444444" font-size="11">Predicted Label</text>',
+        f'<text x="12" y="{H//2}" text-anchor="middle" fill="#444444" '
         f'font-size="11" transform="rotate(-90,12,{H//2})">True Label</text>',
     ]
 
@@ -443,13 +443,13 @@ def heatmap_confusion(CM_dict, classes,
     for ci, c_pred in enumerate(classes):
         x = pad_l + ci * cell + cell // 2
         svg.append(f'<text x="{x}" y="{pad_t-10}" text-anchor="middle" '
-                   f'fill="#ccc" font-size="12">Class {c_pred}</text>')
+                   f'fill="#333333" font-size="12">Class {c_pred}</text>')
     
     # ── Add row headers (true labels) ─────────────────────────────────
     for ri, c_true in enumerate(classes):
         y = pad_t + ri * cell + cell // 2 + 5
         svg.append(f'<text x="{pad_l-10}" y="{y}" text-anchor="end" '
-                   f'fill="#ccc" font-size="12">Class {c_true}</text>')
+                   f'fill="#333333" font-size="12">Class {c_true}</text>')
 
     # ── Draw cells with color coding ─────────────────────────────────
     for ri, c_true in enumerate(classes):
@@ -461,15 +461,15 @@ def heatmap_confusion(CM_dict, classes,
             if c_true == c_pred:
                 # Diagonal (correct predictions): gradient to green
                 # Formula: Light → Dark Green as intensity increases
-                r_ = int(42 * (1 - intensity) + 42)      # RGB: (42, 157±, 143±) → darker
-                g_ = int(157 * intensity + 50 * (1 - intensity))
-                b_ = int(143 * intensity + 62 * (1 - intensity))
+                r_ = int(42 * intensity + 250 * (1 - intensity))      # RGB: (42, 157±, 143±) → darker
+                g_ = int(157 * intensity + 250 * (1 - intensity))
+                b_ = int(143 * intensity + 250 * (1 - intensity))
             else:
                 # Off-diagonal (misclassifications): gradient to red
                 # Formula: Light → Dark Red as intensity increases
-                r_ = int(230 * intensity + 26 * (1 - intensity))  # RGB: (230±, 57±, 70±) → darker
-                g_ = int(57 * intensity + 26 * (1 - intensity))
-                b_ = int(70 * intensity + 46 * (1 - intensity))
+                r_ = int(230 * intensity + 250 * (1 - intensity))  # RGB: (230±, 57±, 70±) → darker
+                g_ = int(57 * intensity + 250 * (1 - intensity))
+                b_ = int(70 * intensity + 250 * (1 - intensity))
             
             color = f"rgb({r_},{g_},{b_})"
             x = pad_l + ci * cell
@@ -477,11 +477,11 @@ def heatmap_confusion(CM_dict, classes,
             
             # Draw cell
             svg.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" '
-                       f'fill="{color}" stroke="#1a1a2e" stroke-width="2"/>')
+                       f'fill="{color}" stroke="#ffffff" stroke-width="2"/>')
             
             # Add count text
             # Choose white text for dark cells, light gray for bright cells
-            txt_fill = "#fff" if intensity > 0.4 else "#ccc"
+            txt_fill = "#fff" if intensity > 0.4 else "#333333"
             svg.append(f'<text x="{x+cell//2}" y="{y+cell//2+6}" '
                        f'text-anchor="middle" fill="{txt_fill}" '
                        f'font-size="18" font-weight="bold">{v}</text>')
@@ -521,8 +521,8 @@ def line_chart_shrinkage(shrinkage_results, best_alpha,
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="35" fill="#ffffff" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">{title}</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="35" fill="#000000" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle">{title}</text>'
     ]
     
     alphas = [r['alpha'] for r in shrinkage_results]
@@ -544,26 +544,26 @@ def line_chart_shrinkage(shrinkage_results, best_alpha,
         return px, py
 
     # Draw grid and axes
-    svg.append(f'  <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1">')
+    svg.append(f'  <g stroke="#000000" stroke-opacity="0.2" stroke-width="1">')
     # Y-axis ticks (Accuracy)
     num_ticks = 5
     for i in range(num_ticks + 1):
         tick_acc = min_acc_plot + i * (acc_range_plot / num_ticks)
         y = margin["top"] + plot_h - i * (plot_h / num_ticks)
         svg.append(f'    <line x1="{margin["left"]}" y1="{y}" x2="{W - margin["right"]}" y2="{y}"/>')
-        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end">{tick_acc:.3f}</text>')
+        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="end">{tick_acc:.3f}</text>')
     
     # X-axis ticks (Alpha)
     for a in alphas:
         px, _ = to_px(a, 0)
         y = margin["top"] + plot_h
         svg.append(f'    <line x1="{px}" y1="{margin["top"]}" x2="{px}" y2="{y}"/>')
-        svg.append(f'    <text x="{px}" y="{y + 25}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">{a:.1f}</text>')
+        svg.append(f'    <text x="{px}" y="{y + 25}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="middle">{a:.1f}</text>')
     svg.append(f'  </g>')
 
     # Axis Labels
-    svg.append(f'  <text x="{W/2}" y="{H - 15}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle">Shrinkage (α)</text>')
-    svg.append(f'  <text x="25" y="{H/2}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 25 {H/2})">Cross-Validation Accuracy</text>')
+    svg.append(f'  <text x="{W/2}" y="{H - 15}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle">Shrinkage (α)</text>')
+    svg.append(f'  <text x="25" y="{H/2}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 25 {H/2})">Cross-Validation Accuracy</text>')
     
     # Draw line
     path_d = []
@@ -617,8 +617,8 @@ def bar_chart_k_accuracy(k_results, best_k,
     
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" fill="#1a1a2e"/>',
-        f'  <text x="{W/2}" y="35" fill="#ffffff" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">{title}</text>'
+        f'  <rect width="{W}" height="{H}" fill="#ffffff"/>',
+        f'  <text x="{W/2}" y="35" fill="#000000" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">{title}</text>'
     ]
     
     ks = [r['k'] for r in k_results]
@@ -633,19 +633,19 @@ def bar_chart_k_accuracy(k_results, best_k,
     acc_range_plot = max_acc_plot - min_acc_plot
     
     # Draw grid and axes
-    svg.append(f'  <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1">')
+    svg.append(f'  <g stroke="#000000" stroke-opacity="0.2" stroke-width="1">')
     # Y-axis ticks
     num_ticks = 5
     for i in range(num_ticks + 1):
         tick_acc = min_acc_plot + i * (acc_range_plot / num_ticks)
         y = margin["top"] + plot_h - i * (plot_h / num_ticks)
         svg.append(f'    <line x1="{margin["left"]}" y1="{y}" x2="{W - margin["right"]}" y2="{y}"/>')
-        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_acc:.3f}</text>')
+        svg.append(f'    <text x="{margin["left"] - 10}" y="{y + 5}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="end" stroke="none">{tick_acc:.3f}</text>')
     svg.append(f'  </g>')
 
     # Axis Labels
-    svg.append(f'  <text x="{W/2}" y="{H - 15}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle">Number of Components (K)</text>')
-    svg.append(f'  <text x="25" y="{H/2}" fill="#ffffff" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 25 {H/2})">Cross-Validation Accuracy</text>')
+    svg.append(f'  <text x="{W/2}" y="{H - 15}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle">Number of Components (K)</text>')
+    svg.append(f'  <text x="25" y="{H/2}" fill="#000000" font-family="sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 25 {H/2})">Cross-Validation Accuracy</text>')
     
     # Draw bars
     bar_width = min(80, plot_w / (len(ks) + 1))
@@ -662,10 +662,10 @@ def bar_chart_k_accuracy(k_results, best_k,
         color = "#e9c46a" if k == best_k else "#2a9d8f"
         
         svg.append(f'  <rect x="{x}" y="{y}" width="{bar_width}" height="{bar_h}" fill="{color}" rx="4" ry="4"/>')
-        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{acc*100:.1f}%</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{y - 10}" fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">{acc*100:.1f}%</text>')
         
         # X-axis label
-        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#a0a0b0" font-family="sans-serif" font-size="14" text-anchor="middle">{k}</text>')
+        svg.append(f'  <text x="{x + bar_width/2}" y="{margin["top"] + plot_h + 20}" fill="#555555" font-family="sans-serif" font-size="14" text-anchor="middle">{k}</text>')
 
     svg.append('</svg>')
     
